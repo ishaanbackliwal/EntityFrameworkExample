@@ -1,4 +1,5 @@
 ﻿using EntityFrameworkExample.Data.Configurations;
+using EntityFrameworkExample.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,10 +10,12 @@ namespace EntityFrameworkExample.Data.Context
 {
     public class DataContext : DbContext
     {
+        public DbSet<Barrel> Barrels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new BarrelConfiguration());
 
             //Tell the context about the configurations
             modelBuilder.Configurations.Add(new ExampleEntityConfiguration());
